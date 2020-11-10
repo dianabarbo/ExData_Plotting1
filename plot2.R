@@ -1,12 +1,14 @@
 ## Leyendo archivo
-consumption <- read.csv("household_power_consumption.txt", sep=";", na.strings = "?", colClasses = c('character','character','numeric','numeric','numeric','numeric','numeric','numeric','numeric'))
+consumption <- read.csv("household_power_consumption.txt", header = TRUE, sep=";", na.strings = "?", colClasses = c('character','character','numeric','numeric','numeric','numeric','numeric','numeric','numeric'))
 head(consumption)
 
 ## Formato de la fecha DD/MM/AAAA
 consumption$Date <- as.Date(consumption$Date, "%d/%m/%Y")
 
 ## Filtrando las fechas dentro del rango 2007-02-01 y 2007-02-02
-consumption <- subset(consumption,Date >= as.Date("2007-2-1") & Date <= as.Date("2007-2-2"))
+initial <- "2007-2-1"
+final <- "2007-2-2"
+consumption <- subset(consumption,Date >= as.Date(initial) & Date <= as.Date(final))
 
 ## Combinando las columnas de fecha y hora
 dateTime <- paste(consumption$Date, consumption$Time)
